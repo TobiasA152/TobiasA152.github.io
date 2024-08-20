@@ -1,1 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>CodePen - Re-creation of 2011 SAVEUR Cookie Advent Calendar </title>
+
+  <link rel="stylesheet" media="screen" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-4fb206409c49db2d3c2bc2eda945abe0a7300bff27e5970af69d880a1a5600dd.css" />
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>CodePen - Re-creation of 2011 SAVEUR Cookie Advent Calendar </title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  <meta charset=&quot;UTF-8&quot;>
+  
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;shortcut icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+  
+    <script src=&quot;https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js&quot;></script>
+
+
+  <title>CodePen - Re-creation of 2011 SAVEUR Cookie Advent Calendar </title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/webcraftsman/pen/LOKRRQ&quot;>
+  
+  <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css&quot;>
+
+  
+  
+<style>
+@keyframes wiggle {
+  0%, 50%, 100% {
+    transform: rotate(0deg);
+  }
+  6.25%, 43.75% {
+    transform: rotate(1deg);
+  }
+  12.5%, 37.5% {
+    transform: rotate(2deg);
+  }
+  18.75%, 31.25% {
+    transform: rotate(3deg);
+  }
+  25% {
+    transform: rotate(4deg);
+  }
+  56.25%, 93.75% {
+    transform: rotate(-1deg);
+  }
+  62.5%, 87.5% {
+    transform: rotate(-2deg);
+  }
+  68.75%, 81.25% {
+    transform: rotate(-3deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+}
+.cookie-advent-calendar {
+  width: 970px;
+  display: grid;
+  grid-template-columns: repeat(5, 181px);
+  grid-gap: 10px 15px;
+  margin: 50px auto;
+}
+
+header {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/732/header.png) no-repeat center;
+  grid-column: 1/span 5;
+  height: 85px;
+  margin-bottom: 18px;
+  text-indent: -999em;
+}
+
+aside {
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  grid-column: 1/span 5;
+  padding: 12px 0;
+}
+
+.write-up {
+  background-color: #637316;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 14px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 14px;
+  text-decoration: none;
+  transition: 0.25s ease-in;
+}
+.write-up:hover {
+  background-color: #9b0205;
+}
+
+.calendar-reset {
+  background-color: #9b0205;
+  border: 0;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+  height: 28px;
+  padding: 0 14px;
+  transition: 0.25s ease-in;
+}
+.calendar-reset:hover {
+  background-color: #637316;
+}
+
+.credit {
+  clear: both;
+  grid-column: 1/span 5;
+  padding-top: 24px;
+  text-align: right;
+}
+
+.day {
+  float: left;
+  height: 257px;
+  margin-left: 15px;
+  margin-top: 10px;
+  perspective: 1000px;
+  position: relative;
+  width: 181px;
+}
+@supports (display: grid) {
+  .day {
+    grid-column: span 1;
+    margin: 0;
+    width: auto;
+  }
+}
+
+.day:nth-child(5n+3) {
+  clear: left;
+  margin-left: 0;
+}
+
+.card {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+}
+
+.day:not(.future) .card {
+  cursor: pointer;
+}
+
+.day:not(.future) .card:hover {
+  animation: wiggle 0.5s infinite;
+}
+
+.day:not(.future) .card.flipped:hover {
+  animation: none;
+}
+
+.back a {
+  display: block;
+}
+
+.front,
+.back a {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.6s;
+}
+
+.front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.day:not(.active-day) .front {
+  background: url(&quot;letters1.png&quot;) no-repeat;
+}
+
+.day.active-day .front {
+  background: url(&quot;letters2.png&quot;) no-repeat;
+}
+
+.back a {
+  background: url(&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/732/recipes-sprite.jpg&quot;) no-repeat;
+  transform: rotateY(-180deg);
+}
+
+.flipped .front {
+  transform: rotateY(180deg);
+}
+
+.flipped .back a {
+  transform: rotateY(0deg);
+}
+
+[data-day=&quot;1&quot;] .card {
+  height: 260px;
+  width: 184px;
+  margin-right: -1px;
+  margin-top: 1px;
+}
+[data-day=&quot;1&quot;]:not(.active-day) .front {
+  background-position: -7px -6px;
+}
+[data-day=&quot;1&quot;].active-day .front {
+  background-position: -8px -7px;
+}
+[data-day=&quot;1&quot;] .back a {
+  background-position: -3px -3px;
+}
+
+[data-day=&quot;2&quot;] .card {
+  height: 258px;
+  width: 187px;
+  margin-top: 6px;
+  margin-left: -4px;
+}
+[data-day=&quot;2&quot;]:not(.active-day) .front {
+  background-position: -201px -6px;
+}
+[data-day=&quot;2&quot;].active-day .front {
+  background-position: -197px -5px;
+}
+[data-day=&quot;2&quot;].future .front {
+  background-position: -201px -1357px;
+}
+[data-day=&quot;2&quot;] .back a {
+  background-position: -201px -3px;
+}
+
+[data-day=&quot;3&quot;] .card {
+  height: 259px;
+  width: 189px;
+  margin-left: -2px;
+}
+[data-day=&quot;3&quot;]:not(.active-day) .front {
+  background-position: -398px -1px;
+}
+[data-day=&quot;3&quot;].active-day .front {
+  background-position: -390px -4px;
+}
+[data-day=&quot;3&quot;].future .front {
+  background-position: -398px -1351px;
+}
+[data-day=&quot;3&quot;] .back a {
+  background-position: -394px -3px;
+}
+
+[data-day=&quot;4&quot;] .card {
+  height: 257px;
+  width: 186px;
+  margin-top: 4px;
+}
+[data-day=&quot;4&quot;]:not(.active-day) .front {
+  background-position: -592px -5px;
+}
+[data-day=&quot;4&quot;].active-day .front {
+  background-position: -588px -6px;
+}
+[data-day=&quot;4&quot;].future .front {
+  background-position: -592px -1355px;
+}
+[data-day=&quot;4&quot;] .back a {
+  background-position: -587px -3px;
+}
+
+[data-day=&quot;5&quot;] .card {
+  height: 257px;
+  width: 186px;
+  margin-top: 6px;
+  margin-left: -5px;
+}
+[data-day=&quot;5&quot;]:not(.active-day) .front {
+  background-position: -777px -6px;
+}
+[data-day=&quot;5&quot;].active-day .front {
+  background-position: -774px -6px;
+}
+[data-day=&quot;5&quot;].future .front {
+  background-position: -777px -1357px;
+}
+[data-day=&quot;5&quot;] .back a {
+  background-position: -779px -3px;
+}
+
+[data-day=&quot;6&quot;] .card {
+  height: 261px;
+  width: 191px;
+  margin-left: -3px;
+}
+[data-day=&quot;6&quot;]:not(.active-day) .front {
+  background-position: -7px -267px;
+}
+[data-day=&quot;6&quot;].active-day .front {
+  background-position: -2px -272px;
+}
+[data-day=&quot;6&quot;].future .front {
+  background-position: -7px -1618px;
+}
+[data-day=&quot;6&quot;] .back a {
+  background-position: 0 -272px;
+}
+
+[data-day=&quot;7&quot;] .card {
+  height: 258px;
+  width: 189px;
+  margin-top: 4px;
+  margin-left: -1px;
+}
+[data-day=&quot;7&quot;]:not(.active-day) .front {
+  background-position: -204px -271px;
+}
+[data-day=&quot;7&quot;].active-day .front {
+  background-position: -195px -272px;
+}
+[data-day=&quot;7&quot;].future .front {
+  background-position: -204px -1622px;
+}
+[data-day=&quot;7&quot;] .back a {
+  background-position: -200px -272px;
+}
+
+[data-day=&quot;8&quot;] .card {
+  height: 258px;
+  width: 188px;
+  margin-top: 2px;
+  margin-left: -5px;
+}
+[data-day=&quot;8&quot;]:not(.active-day) .front {
+  background-position: -393px -273px;
+}
+[data-day=&quot;8&quot;].active-day .front {
+  background-position: -389px -273px;
+}
+[data-day=&quot;8&quot;].future .front {
+  background-position: -393px -1623px;
+}
+[data-day=&quot;8&quot;] .back a {
+  background-position: -392px -273px;
+}
+
+[data-day=&quot;9&quot;] .card {
+  height: 260px;
+  width: 184px;
+  margin-top: 2px;
+}
+[data-day=&quot;9&quot;]:not(.active-day) .front {
+  background-position: -593px -273px;
+}
+[data-day=&quot;9&quot;].active-day .front {
+  background-position: -587px -275px;
+}
+[data-day=&quot;9&quot;].future .front {
+  background-position: -593px -1622px;
+}
+[data-day=&quot;9&quot;] .back a {
+  background-position: -584px -272px;
+}
+
+[data-day=&quot;10&quot;] .card {
+  height: 257px;
+  width: 184px;
+  margin-top: 5px;
+  margin-left: -1px;
+}
+[data-day=&quot;10&quot;]:not(.active-day) .front {
+  background-position: -783px -276px;
+}
+[data-day=&quot;10&quot;].active-day .front {
+  background-position: -775px -274px;
+}
+[data-day=&quot;10&quot;].future .front {
+  background-position: -783px -1627px;
+}
+[data-day=&quot;10&quot;] .back a {
+  background-position: -778px -273px;
+}
+
+[data-day=&quot;11&quot;] .card {
+  height: 257px;
+  margin-right: -2px;
+  width: 183px;
+}
+[data-day=&quot;11&quot;]:not(.active-day) .front {
+  background-position: -8px -541px;
+}
+[data-day=&quot;11&quot;].active-day .front {
+  background-position: -3px -543px;
+}
+[data-day=&quot;11&quot;].future .front {
+  background-position: -8px -1891px;
+}
+[data-day=&quot;11&quot;] .back a {
+  background-position: -3px -540px;
+}
+
+[data-day=&quot;12&quot;] .card {
+  height: 263px;
+  margin-left: -6px;
+  width: 190px;
+}
+[data-day=&quot;12&quot;]:not(.active-day) .front {
+  background-position: -199px -541px;
+}
+[data-day=&quot;12&quot;].active-day .front {
+  background-position: -193px -541px;
+}
+[data-day=&quot;12&quot;].future .front {
+  background-position: -199px -1891px;
+}
+[data-day=&quot;12&quot;] .back a {
+  background-position: -192px -532px;
+}
+
+[data-day=&quot;13&quot;] .card {
+  height: 261px;
+  margin-left: -3px;
+  margin-top: 3px;
+  width: 189px;
+}
+[data-day=&quot;13&quot;]:not(.active-day) .front {
+  background-position: -391px -542px;
+}
+[data-day=&quot;13&quot;].active-day .front {
+  background-position: -387px -542px;
+}
+[data-day=&quot;13&quot;].future .front {
+  background-position: -391px -1894px;
+}
+[data-day=&quot;13&quot;] .back a {
+  background-position: -387px -540px;
+}
+
+[data-day=&quot;14&quot;] .card {
+  height: 257px;
+  margin-left: -4px;
+  margin-top: 3px;
+  width: 189px;
+}
+[data-day=&quot;14&quot;]:not(.active-day) .front {
+  background-position: -589px -543px;
+}
+[data-day=&quot;14&quot;].active-day .front {
+  background-position: -586px -542px;
+}
+[data-day=&quot;14&quot;].future .front {
+  background-position: -589px -1893px;
+}
+[data-day=&quot;14&quot;] .back a {
+  background-position: -586px -541px;
+}
+
+[data-day=&quot;15&quot;] .card {
+  height: 257px;
+  margin-top: 2px;
+  margin-right: -4px;
+  width: 185px;
+}
+[data-day=&quot;15&quot;]:not(.active-day) .front {
+  background-position: -777px -542px;
+}
+[data-day=&quot;15&quot;].active-day .front {
+  background-position: -774px -545px;
+}
+[data-day=&quot;15&quot;].future .front {
+  background-position: -777px -1891px;
+}
+[data-day=&quot;15&quot;] .back a {
+  background-position: -775px -541px;
+}
+
+[data-day=&quot;16&quot;] .card {
+  height: 264px;
+  margin-top: 1px;
+  margin-left: -4px;
+  width: 198px;
+}
+[data-day=&quot;16&quot;]:not(.active-day) .front {
+  background-position: 0px -805px;
+}
+[data-day=&quot;16&quot;].active-day .front {
+  background-position: 0 -806px;
+}
+[data-day=&quot;16&quot;].future .front {
+  background-position: 0 -2155px;
+}
+[data-day=&quot;16&quot;] .back a {
+  background-position: 6px -811px;
+}
+
+[data-day=&quot;17&quot;] .card {
+  height: 257px;
+  margin-top: 1px;
+  margin-right: -1px;
+  width: 182px;
+}
+[data-day=&quot;17&quot;]:not(.active-day) .front {
+  background-position: -200px -810px;
+}
+[data-day=&quot;17&quot;].active-day .front {
+  background-position: -200px -811px;
+}
+[data-day=&quot;17&quot;].future .front {
+  background-position: -200px -2161px;
+}
+[data-day=&quot;17&quot;] .back a {
+  background-position: -199px -812px;
+}
+
+[data-day=&quot;18&quot;] .card {
+  height: 258px;
+  margin-top: 2px;
+  margin-left: -3px;
+  width: 188px;
+}
+[data-day=&quot;18&quot;]:not(.active-day) .front {
+  background-position: -395px -812px;
+}
+[data-day=&quot;18&quot;].active-day .front {
+  background-position: -391px -812px;
+}
+[data-day=&quot;18&quot;].future .front {
+  background-position: -395px -2162px;
+}
+[data-day=&quot;18&quot;] .back a {
+  background-position: -389px -809px;
+}
+
+[data-day=&quot;19&quot;] .card {
+  height: 256px;
+  margin-left: -2px;
+  width: 182px;
+}
+[data-day=&quot;19&quot;]:not(.active-day) .front {
+  background-position: -590px -813px;
+}
+[data-day=&quot;19&quot;].active-day .front {
+  background-position: -587px -810px;
+}
+[data-day=&quot;19&quot;].future .front {
+  background-position: -590px -2163px;
+}
+[data-day=&quot;19&quot;] .back a {
+  background-position: -588px -808px;
+}
+
+[data-day=&quot;20&quot;] .card {
+  height: 264px;
+  margin-bottom: -7px;
+  margin-right: -2px;
+  width: 183px;
+}
+[data-day=&quot;20&quot;]:not(.active-day) .front {
+  background-position: -782px -813px;
+}
+[data-day=&quot;20&quot;].active-day .front {
+  background-position: -780px -813px;
+}
+[data-day=&quot;20&quot;].future .front {
+  background-position: -782px -2163px;
+}
+[data-day=&quot;20&quot;] .back a {
+  background-position: -779px -808px;
+}
+
+[data-day=&quot;21&quot;] .card {
+  height: 256px;
+  margin-left: -3px;
+  width: 186px;
+}
+[data-day=&quot;21&quot;]:not(.active-day) .front {
+  background-position: -8px -1080px;
+}
+[data-day=&quot;21&quot;].active-day .front {
+  background-position: -3px -1081px;
+}
+[data-day=&quot;21&quot;].future .front {
+  background-position: -8px -2430px;
+}
+[data-day=&quot;21&quot;] .back a {
+  background-position: -2px -1080px;
+}
+
+[data-day=&quot;22&quot;] .card {
+  height: 260px;
+  margin-bottom: -3px;
+  margin-left: -3px;
+  width: 186px;
+}
+[data-day=&quot;22&quot;]:not(.active-day) .front {
+  background-position: -200px -1080px;
+}
+[data-day=&quot;22&quot;].active-day .front {
+  background-position: -196px -1080px;
+}
+[data-day=&quot;22&quot;].future .front {
+  background-position: -200px -2430px;
+}
+[data-day=&quot;22&quot;] .back a {
+  background-position: -199px -1076px;
+}
+
+[data-day=&quot;23&quot;] .card {
+  height: 258px;
+  margin-top: 2px;
+  width: 181px;
+}
+[data-day=&quot;23&quot;]:not(.active-day) .front {
+  background-position: -400px -1080px;
+}
+[data-day=&quot;23&quot;].active-day .front {
+  background-position: -395px -1084px;
+}
+[data-day=&quot;23&quot;].future .front {
+  background-position: -400px -2430px;
+}
+[data-day=&quot;23&quot;] .back a {
+  background-position: -391px -1080px;
+}
+
+[data-day=&quot;24&quot;] .card {
+  height: 257px;
+  margin-bottom: -3px;
+  margin-right: -1px;
+  width: 182px;
+}
+[data-day=&quot;24&quot;]:not(.active-day) .front {
+  background-position: -591px -1080px;
+}
+[data-day=&quot;24&quot;].active-day .front {
+  background-position: -586px -1080px;
+}
+[data-day=&quot;24&quot;].future .front {
+  background-position: -591px -2430px;
+}
+[data-day=&quot;24&quot;] .back a {
+  background-position: -590px -1079px;
+}
+
+[data-day=&quot;25&quot;] .card {
+  height: 261px;
+  margin-left: -9px;
+  margin-bottom: -4px;
+  width: 191px;
+}
+[data-day=&quot;25&quot;]:not(.active-day) .front {
+  background-position: -773px -1078px;
+}
+[data-day=&quot;25&quot;].active-day .front {
+  background-position: -770px -1078px;
+}
+[data-day=&quot;25&quot;].future .front {
+  background-position: -773px -2428px;
+}
+[data-day=&quot;25&quot;] .back a {
+  background-position: -770px -1077px;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate=&quot;no&quot;>
+  <div class=&quot;cookie-advent-calendar&quot;>
+	<header>The SAVEUR Cookie Advent Calendar</header>
+	<aside>
+		<a class=&quot;write-up&quot; href=&quot;https://codepen.io/webcraftsman/post/re-creating-cookie-advent-calendar-with-css-grid&quot;>Background of Project</a>
+		<button id=&quot;calendar-reset&quot; class=&quot;calendar-reset&quot;>Reset Calendar</button></aside>
+	<div class=&quot;day&quot; data-day=&quot;1&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Raspberry-Jam-Sandwich-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;2&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Cornmeal-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;3&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Classic-Sugar-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;4&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Pecan-Squares&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;5&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Coconut-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;6&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Swedish-Dream-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;7&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Caramel-Crumb-Bars&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;8&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Swedish-Shortbread-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;9&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Gingersnaps&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;10&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Speculaas-Molded-Ginger-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;11&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Vanillekipferl-Vanilla-Crescents&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;12&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Basler-Brunsli-Chocolate-Almond-Spice-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;13&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Peanut-Butter-Cookies&quot; target=&quot;_blank&quot;></a></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;14&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Saffron-Biscotti&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;15&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/White-Chocolate-and-Orange-Meringues&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;16&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Snickerdoodles&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;17&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Brown-Butter-Thumbprints-with-Lime-Curd&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;18&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Amadeus-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;19&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Lavender-Tuiles&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;20&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Chocolate-Almond-Cookies-Strazzate&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;21&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Neiman-Marcus-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;22&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/recipes/classic-gingerbread-cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;23&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Alfajores-Dulce-de-Leche-Cookie-Sandwiches&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;24&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Krumkakes-Norwegian-Wafer-Cookies&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<div class=&quot;day&quot; data-day=&quot;25&quot;>
+		<div class=&quot;card&quot;>
+			<div class=&quot;front&quot;></div>
+			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Galletas-con-Chochitos-Mexican-Butter-Cookies-with-Sprinkles&quot; target=&quot;_blank&quot;></a></div>
+		</div>
+	</div>
+	<p class=&quot;credit&quot;><em>Photos by Maxime Iattoni and Illustration by Leigh Wells</em></p>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js'></script>
+      <script id=&quot;rendered-js&quot; >
+$('.card').not('flipped').on('click', function () {
+  if (!$(this).parent().hasClass('future'))
+  {
+    if (!$(this).hasClass('flipped'))
+    {
+      $(this).addClass('flipped');
+    }
+
+    var $cookie = Cookies.get('day'),
+    $this = $(this),
+    $value = $this.parent().attr('data-day');
+
+    if ($cookie != undefined)
+    {
+      Cookies.set('day', $cookie + ',' + $value);
+      var $cookie = Cookies.get('day');
+    } else
+
+
+    {
+      Cookies.set('day', $value);
+      var $cookie = Cookies.get('day');
+    }
+
+  }
+
+});
+
+$('#calendar-reset').on('click', function (e) {
+  e.preventDefault();
+  Cookies.remove('day');
+  $('.card').removeClass('flipped');
+});
+
+$('.card.flipped').unbind('click');
+
+if (Cookies.get('day') != null)
+{
+  var favoritesArray = Cookies.get('day').split(',');
+}
+
+if (typeof favoritesArray != 'undefined')
+{
+  $('.card').each(function () {
+    var $this = $(this);
+
+    if ($.inArray($this.parent().attr('data-day'), favoritesArray) !== -1) {
+      $this.addClass('flipped');
+    }
+  });
+}
+
+var d = new Date();
+var day = d.getDate();
+
+$('.day').each(function () {
+  var dayDate = parseInt($(this).attr('data-day'));
+  if (dayDate === day)
+  {
+    $(this).addClass('active-day');
+  } else
+
+  if (dayDate > day)
+  {
+    $(this).addClass('future');
+  }
+});
+//# sourceURL=pen.js
+    </script>
+
+  
+</body>
+
+</html>
+"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups-to-escape-sandbox allow-popups allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="camera *; display-capture *; geolocation *; microphone *; web-share *" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>
 
