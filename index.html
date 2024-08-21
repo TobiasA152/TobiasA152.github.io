@@ -748,7 +748,7 @@ aside {
 			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Raspberry-Jam-Sandwich-Cookies&quot; target=&quot;_blank&quot;></a></div>
 		</div>
 	</div>
-	<div class=&quot;day&quot; data-day=&quot;2&quot;>
+	<div class=&quot;day active-day&quot; data-day=&quot;2&quot;>
 		<div class=&quot;card&quot;>
 			<div class=&quot;front&quot;></div>
 			<div class=&quot;back&quot;><a href=&quot;https://www.saveur.com/article/Recipes/Cornmeal-Cookies&quot; target=&quot;_blank&quot;></a></div>
@@ -948,22 +948,6 @@ if (typeof favoritesArray != 'undefined')
     }
   });
 }
-
-var d = new Date();
-var day = d.getDate();
-
-$('.day').each(function () {
-  var dayDate = parseInt($(this).attr('data-day'));
-  if (dayDate === day)
-  {
-    $(this).addClass('active-day');
-  } else
-
-  if (dayDate > day)
-  {
-    $(this).addClass('future');
-  }
-});
 //# sourceURL=pen.js
     </script>
 
