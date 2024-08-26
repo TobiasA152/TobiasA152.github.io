@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+
+  <title>Puzzle for Princess</title>
+
+    <link rel="canonical" href="https://codepen.io/tofjadesign/pen/wvLWJdd">
+  
+  
+  
+  
+<style>
+body {
+	margin: 0;
+	display: grid;
+	place-items: center;
+	font-family: "Poppins", sans-serif;
+	background-image: url('MagomeBackgroun.jpg');
+background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.8;
+  color: #FFF;
+}
+
+.container {
+	margin-top: 2%;
+	display: flex;
+	flex-wrap: nowrap;
+	column-gap: 30px;
+
+	/* border: 1px solid #007bff;*/
+}
+
+.left {
+	display: grid;
+}
+
+.right {
+	display: grid;
+}
+
+p {
+	text-align: center;
+}
+h1{
+color:white;
+}
+h2 {
+	margin-top: 50px;
+	text-align: center;
+	color: white;
+	font-weight: 500;
+	letter-spacing: 1px;
+	font-size: 22px;
+}
+
+h3 {
+	text-align: center;
+	color: white;
+	font-weight: 500;
+	letter-spacing: 1px;
+	font-size: 16px;
+}
+
+h6 {
+	display: block;
+	margin-top: 0px;
+	color: white;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.puzzle {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: repeat(10, 1fr);
+}
+
+.horizontal {
+	width: 35px;
+	height: 37px;
+	border: 1px solid #333;
+	border-bottom: none;
+	border-right: none;
+	font-size: 9px;
+	cursor: pointer;
+	color: #333;
+}
+
+.last {
+	border-right: 1px solid #333;
+}
+
+.bottom {
+	border-bottom: 1px solid #333;
+}
+
+.nr {
+	display: inline-block;
+	margin-left: 2px;
+}
+
+.example {
+	display: inline-block;
+	text-align: center;
+}
+
+.ex {
+	text-align: center;
+	font-family: "Indie Flower", cursive;
+	font-size: 19px;
+	font-weight: bold;
+	color: #0056b3;
+}
+
+.black {
+	background-color: black;
+}
+
+input {
+	font-size: 21px;
+	font-family: "Indie Flower", cursive;
+	text-transform: capitalize;
+	color: #0056b3;
+	width: 70%;
+	height: 17px;
+	border: none;
+	cursor: pointer;
+	margin-left: 3px;
+}
+
+input.ans {
+	width: 96%;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 20px;
+	letter-spacing: 0.5px;
+	color: #222;
+	text-align: left;
+}
+
+.a-title {
+	font-weight: 500;
+	letter-spacing: 0.6px;
+	color: white;
+}
+
+/* answer */
+.answer {
+	margin-top: 30px;
+	text-align: center;
+	border-radius: 5px;
+	color: #222;
+	font-size: 12px;
+}
+
+.field {
+	border: 1px solid #222;
+	margin-top: 10px;
+	padding: 6px 4px;
+}
+
+button {
+	margin-top: 20px;
+	text-transform: capitalize;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+.ver {
+	margin-top: -120px;
+}
+
+ul {
+	margin: 0;
+	margin-top: -30px;
+	padding: 0;
+}
+
+ul li {
+	list-style-type: none;
+	font-size: 12px;
+	letter-spacing: 1px;
+}
+#resultaat {
+	margin-top: 1rem;
+	font-size: 1.8rem;
+	letter-spacing: 1px;
+}
+
+@media screen and (max-width: 600px) {
+	.container {
+		width: 100%;
+		display: grid;
+	}
+	.left {
+		padding-left: 10px;
+	}
+
+	.ver {
+		margin: 0;
+		margin-top: 20px;
+	}
+
+	.right {
+		margin-top: 20px;
+	}
+
+	h6 {
+		font-size: 18px;
+	}
+
+	ul li {
+		margin: 0;
+		font-size: 10px;
+	}
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body translate="no">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Permanent+Marker&display=swap" rel="stylesheet">
+<h2>Puzzle for Princess 👸</h2>	
+<h1>Well done baby :)) I'm very proud of you</h1>
+<h1><a href="https://drive.google.com/file/d/1HH1rqPyxY4YEOeBiVsM8WRAwNuTCw250/view?usp=sharing" style="color:rgb(216, 235, 255)">Here is a short reward for the best slut<a/></h1>
+
+  
+      <script id="rendered-js" >
+var MD5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()};function M(d){for(var _,m="0123456789ABCDEF",f="",r=0;r<d.length;r++)_=d.charCodeAt(r),f+=m.charAt(_>>>4&15)+m.charAt(15&_);return f}function X(d){for(var _=Array(d.length>>2),m=0;m<_.length;m++)_[m]=0;for(m=0;m<8*d.length;m+=8)_[m>>5]|=(255&d.charCodeAt(m/8))<<m%32;return _}function V(d){for(var _="",m=0;m<32*d.length;m+=8)_+=String.fromCharCode(d[m>>5]>>>m%32&255);return _}function Y(d,_){d[_>>5]|=128<<_%32,d[14+(_+64>>>9<<4)]=_;for(var m=1732584193,f=-271733879,r=-1732584194,i=271733878,n=0;n<d.length;n+=16){var h=m,t=f,g=r,e=i;f=md5_ii(f=md5_ii(f=md5_ii(f=md5_ii(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_hh(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_gg(f=md5_ff(f=md5_ff(f=md5_ff(f=md5_ff(f,r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+0],7,-680876936),f,r,d[n+1],12,-389564586),m,f,d[n+2],17,606105819),i,m,d[n+3],22,-1044525330),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+4],7,-176418897),f,r,d[n+5],12,1200080426),m,f,d[n+6],17,-1473231341),i,m,d[n+7],22,-45705983),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+8],7,1770035416),f,r,d[n+9],12,-1958414417),m,f,d[n+10],17,-42063),i,m,d[n+11],22,-1990404162),r=md5_ff(r,i=md5_ff(i,m=md5_ff(m,f,r,i,d[n+12],7,1804603682),f,r,d[n+13],12,-40341101),m,f,d[n+14],17,-1502002290),i,m,d[n+15],22,1236535329),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+1],5,-165796510),f,r,d[n+6],9,-1069501632),m,f,d[n+11],14,643717713),i,m,d[n+0],20,-373897302),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+5],5,-701558691),f,r,d[n+10],9,38016083),m,f,d[n+15],14,-660478335),i,m,d[n+4],20,-405537848),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+9],5,568446438),f,r,d[n+14],9,-1019803690),m,f,d[n+3],14,-187363961),i,m,d[n+8],20,1163531501),r=md5_gg(r,i=md5_gg(i,m=md5_gg(m,f,r,i,d[n+13],5,-1444681467),f,r,d[n+2],9,-51403784),m,f,d[n+7],14,1735328473),i,m,d[n+12],20,-1926607734),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+5],4,-378558),f,r,d[n+8],11,-2022574463),m,f,d[n+11],16,1839030562),i,m,d[n+14],23,-35309556),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+1],4,-1530992060),f,r,d[n+4],11,1272893353),m,f,d[n+7],16,-155497632),i,m,d[n+10],23,-1094730640),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+13],4,681279174),f,r,d[n+0],11,-358537222),m,f,d[n+3],16,-722521979),i,m,d[n+6],23,76029189),r=md5_hh(r,i=md5_hh(i,m=md5_hh(m,f,r,i,d[n+9],4,-640364487),f,r,d[n+12],11,-421815835),m,f,d[n+15],16,530742520),i,m,d[n+2],23,-995338651),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+0],6,-198630844),f,r,d[n+7],10,1126891415),m,f,d[n+14],15,-1416354905),i,m,d[n+5],21,-57434055),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+12],6,1700485571),f,r,d[n+3],10,-1894986606),m,f,d[n+10],15,-1051523),i,m,d[n+1],21,-2054922799),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+8],6,1873313359),f,r,d[n+15],10,-30611744),m,f,d[n+6],15,-1560198380),i,m,d[n+13],21,1309151649),r=md5_ii(r,i=md5_ii(i,m=md5_ii(m,f,r,i,d[n+4],6,-145523070),f,r,d[n+11],10,-1120210379),m,f,d[n+2],15,718787259),i,m,d[n+9],21,-343485551),m=safe_add(m,h),f=safe_add(f,t),r=safe_add(r,g),i=safe_add(i,e)}return Array(m,f,r,i)}function md5_cmn(d,_,m,f,r,i){return safe_add(bit_rol(safe_add(safe_add(_,d),safe_add(f,i)),r),m)}function md5_ff(d,_,m,f,r,i,n){return md5_cmn(_&m|~_&f,d,_,r,i,n)}function md5_gg(d,_,m,f,r,i,n){return md5_cmn(_&f|m&~f,d,_,r,i,n)}function md5_hh(d,_,m,f,r,i,n){return md5_cmn(_^m^f,d,_,r,i,n)}function md5_ii(d,_,m,f,r,i,n){return md5_cmn(m^(_|~f),d,_,r,i,n)}function safe_add(d,_){var m=(65535&d)+(65535&_);return(d>>16)+(_>>16)+(m>>16)<<16|65535&m}function bit_rol(d,_){return d<<_|d>>>32-_}
+
+
+/** NORMAL words **/
+/* Add this js to your website */
+function createSnowflake() {
+  const snowflake = document.createElement('div');
+  snowflake.classList.add('snowflake');
+  snowflake.textContent = '•';
+  snowflake.style.fontSize = Math.random() * 24 + 10 + 'px';
+  snowflake.style.left = Math.random() * window.innerWidth + 'px';
+  snowflake.style.animation = `fall ${Math.random() * 4 + 4}s linear infinite, sideWays ${Math.random() * 2 + 1}s ease-in-out infinite`;
+
+  document.body.appendChild(snowflake);
+
+  setTimeout(() => {
+    snowflake.remove();
+  }, Math.random() * 4000 + 4000);
+}
+
+document.styleSheets[0].insertRule('@keyframes fall { 0% { top: -50px; } 100% { top: 100vh; } }', document.styleSheets[0].cssRules.length);
+document.styleSheets[0].insertRule('@keyframes sideWays { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(20px); } }', document.styleSheets[0].cssRules.length);
+
+setInterval(createSnowflake, 200);
+
+document.getElementById("submit").addEventListener("click", function (event) {
+  event.preventDefault();
+  
+  //NAUGHTY TRYING TO CHEAT!!!
+  //I have anticipated this >:)) love Adam
+  const correctWord = "a2b3daa03efa97a561aef79a4691d24c";
+  const userInput = document.
+  getElementById("woordInput").
+  value.trim().
+  toLowerCase();
+  const resultaatElement = document.getElementById("resultaat");
+  var userInputchange = MD5(userInput);
+
+  if (userInputchange === correctWord) {
+    resultaatElement.innerHTML =
+    'You did it!';
+    alert("Well done baby! Now put the answer as a url + .html");
+    resultaatElement.style.color = "#222222";
+  } else {
+    resultaatElement.textContent = "Not correct.";
+    resultaatElement.style.color = "red";
+  }
+});
+//# sourceURL=pen.js
+    </script>
+
+  
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+</body>
+
+</html>
