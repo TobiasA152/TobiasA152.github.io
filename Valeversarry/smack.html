@@ -7,7 +7,7 @@
     <style>
       /* Default cursor is club.png */
       body {
-        cursor: url('/img/club.png'), auto;
+        cursor: url('/Valeversarry/img/club.png'), auto;
         font-family: 'Arial', sans-serif;
         background-color: #fceef5;
         text-align: center;
@@ -16,7 +16,7 @@
 
       /* When the mouse is clicked (mousedown), use club2.png */
       body:active {
-        cursor: url('/img/club2.png'), auto;
+        cursor: url('/Valeversarry/img/club2.png'), auto;
       }
 
       h1 {
@@ -46,7 +46,7 @@
       }
       .hole:after {
         display: block;
-        background: url('/img/flowerspainting.png') bottom center no-repeat;
+        background: url('/Valeversarry/img/flowerspainting.png') bottom center no-repeat;
         background-size: contain;
         content: '';
         width: 100%;
@@ -119,7 +119,7 @@
   </head>
   <body>
 	  <audio id="backgroundAudio" autoplay loop hidden>
-	  <source src="/audio/funnya.mp3" type="/audio/mpeg">
+	  <source src="/Valeversarry/audio/funnya.mp3" type="audio/mpeg">
 	  Your browser does not support the audio element.
 	</audio>
     <h1>Whack-an-Adam!</h1>
@@ -157,7 +157,7 @@
       let lastHole;
       let timeUp = false;
       let score = 0;
-      const moleImages = ['/img/drawing.png', '/img/enlarged.png', '/img/samurai.png', '/img/strong.png'];
+      const moleImages = ['/Valeversarry/img/drawing.png', '/Valeversarry/img/enlarged.png', '/Valeversarry/img/samurai.png', '/Valeversarry/img/strong.png'];
 
       function randomTime(min, max) {
         return Math.round(Math.random() * (max - min) + min);
