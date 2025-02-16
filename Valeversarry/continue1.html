@@ -206,7 +206,7 @@
         <p class="story-text" id="story-text"><span>Now you had all your smacking fun, it is time to for me to apologise and make up</span></p>
         <img src="/Valeversarry/img/hug.jpg" alt="" class="story-image float-effect" id="story-image">
 		<div id="shakshuka" style="display: none;"><div class="headline"></div><div class="video-container" id="video-container">
-            <video width="100%">
+            <video width="100%" id="shakshukaVideo">
                 <source src="/Valeversarry/img/shakshuka.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -298,7 +298,7 @@
 				});
 			}
 	function playVideo1() {
-				const video = document.getElementById("shakshuka");
+				const video = document.getElementById("shakshukaVideo");
 				const playButton = document.getElementById("playButton1");
 				// Attempt to play the video
 				video.play().then(() => {
