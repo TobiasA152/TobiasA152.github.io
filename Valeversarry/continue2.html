@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fceef5;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff6493;
+        }
+        .story-container {
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .story-text {
+            font-size: 1.2em;
+            color: #4b4b4b;
+            line-height: 1.5;
+        }
+        .story-text span {
+            display: inline-block;
+        }
+        .story-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: block;
+            margin-top: 15px;
+        }
+        .float-effect {
+            animation: float 3s infinite ease-in-out;
+        }
+        .btn {
+            background-color: #ff6493;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #ff4f70;
+        }
+        .valentine-question {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5em;
+            color: #ff1493;
+            margin-top: 30px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px #ff69b4;
+        }
+        .option-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .option-buttons button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 25px;
+            border: none;
+            width: 45%;
+        }
+        .yes {
+            background-color: #66cc66;
+            color: white;
+        }
+        .no {
+            background-color: #ff4f70;
+            color: white;
+            position: relative;
+            transition: transform 0.3s ease; /* Smooth transition for dodge effect */
+        }
+
+        /* Text Effects */
+        .float {
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .rotate {
+            animation: rotate 3s infinite linear;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .color-change {
+            animation: colorChange 3s infinite alternate;
+        }
+        @keyframes colorChange {
+            0% {
+                color: #ff6493;
+            }
+            100% {
+                color: #ff1493;
+            }
+        }
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .glow {
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+            }
+            100% {
+                text-shadow: 0 0 10px #ff1493, 0 0 20px #ff1493, 0 0 30px #ff1493, 0 0 40px #ff1493;
+            }
+        }
+		.headline {
+            font-family: 'Pacifico', cursive;
+            font-size: 3em;
+            color: #ff77a4;
+            margin-top: 30px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px #00ff99;
+            animation: glow 0.5s infinite alternate;
+        }
+		.yes-button {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            background-color: #66cc66;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .yes-button:hover {
+            background-color: #55aa55;
+        }
+        .video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+		#playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    background-color: #ff6493;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+	<audio id="backgroundAudio" autoplay loop hidden>
+	  <source src="" type="audio/mpeg">
+	  Your browser does not support the audio element.
+	</audio>
+    <h1>Happy Valentine's and Anniversary, My Love!</h1>
+    <div class="story-container">
+        <p class="story-text" id="story-text"><span>Thank you for playing along with me baby</span></p>
+        <img src="img/onsen.jpg" alt="" class="story-image float-effect" id="story-image">
+		<div id="water" style="display: none;"><div class="headline"></div><div class="video-container" id="video-container">
+            <video width="100%" autoplay loop>
+                <source src="img/water.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+			</div>
+        </div>
+        <button class="btn" onclick="nextStory();startAudio()">Next</button>
+		<div id="valentine-question" class="valentine-question" style="display: none;">Will you be my valentine?</div>
+        <div class="option-buttons" id="options" style="display: none;">
+            <button class="yes" onclick="handleAnswer('yes')">Yes</button>
+            <button class="no" id="no-button" onmouseover="dodgeNo()">No</button>
+        </div>
+        
+    </div>
+    <script>
+		const storyData = [
+		{ text: "Thank you for playing along with me baby", image: "img/onsen.jpg", effect: "rotate" },
+		{ text: "For all your effort I give you rewards 🏆 <333", image: "img/onsen.jpg", effect: "float" },
+		{ text: "I can't wait till we're together again my love", image: "img/onsen.jpg", effect: "float" },
+		{ text: "I want you to know that I love you so much and will never let you go", image: "img/TobiasFamily.jpg", effect: "float" },
+		{ text: "I can't imagine anybody else in my life", image: "img/TobiasFamily.jpg", effect: "float" },
+		{ text: "Please enjoy baby :3", image: "img/TobiasFamily.jpg", effect: "color-change" },
+		{ text: "I love you forever and ever", image: "", effect: "color-change" },
+		{ text: "So I have one more thing to ask for now", image: "", effect: "bounce" }
+	];
+
+	let index = 0;
+
+	function nextStory() {
+		index++;
+		if (index < storyData.length) {
+			const words = storyData[index].text.split(' ').map(word => `<span class="${storyData[index].effect}">${word}</span>`).join(' ');
+			document.getElementById("story-text").innerHTML = words;
+			document.getElementById("story-image").classList = "story-image";
+			if (storyData[index].effect) {
+				document.getElementById("story-image").classList.add(storyData[index].effect + '-effect');
+			}
+			document.getElementById("story-image").src = storyData[index].image;
+
+			// Check if the current text is the specific text
+			if (storyData[index].text === "I love you forever and ever") {
+				document.getElementById("water").style.display = "block";
+			} else {
+				document.getElementById("water").style.display = "none";
+			}
+		} else {
+			// Hide the story and show the valentine question
+			document.getElementById("story-text").style.display = "none";
+			document.getElementById("story-image").style.display = "none";
+			document.querySelector(".btn").style.display = "none";
+			showValentineQuestion();
+		}
+	}
+
+	function showValentineQuestion() {
+		document.getElementById("valentine-question").style.display = "block";
+		document.getElementById("options").style.display = "flex";
+	}
+
+	function dodgeNo() {
+		const noButton = document.getElementById("no-button");
+		const randomX = (Math.random() * 400 - 200); // Random X position (-200px to 200px)
+		const randomY = (Math.random() * 200 - 100); // Random Y position (-100px to 100px)
+		noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+	}
+	function playVideo() {
+				var audio = document.getElementById('backgroundAudio');
+				const video = document.getElementById("valentineVideo");
+				const playButton = document.getElementById("playButton");
+				audio.pause()
+				// Attempt to play the video
+				video.play().then(() => {
+					console.log('Video is playing');
+					playButton.style.display = "none"; // Hide the button
+				}).catch(error => {
+					// Show a popup message if video is blocked or fails to play
+					alert('Video playback is blocked. Please interact with the page (e.g., click anywhere) to allow the video to play.');
+					console.error('Video playback failed:', error);
+				});
+			}
+	function startAudio() {
+    var audio = document.getElementById('backgroundAudio');
+
+    // Attempt to play the audio
+    audio.play().then(() => {
+        console.log('Audio is playing');
+    });
+}
+function handleAnswer(answer) {
+            if (answer === 'yes') {
+                window.location.href = 'treasure.html';
+            } else {
+                alert("You're not allowed hehe");
+            }
+        }
+
+        function dodgeNo() {
+            const noButton = document.getElementById("no-button");
+            const randomX = (Math.random() * 400 - 200); // Random X position (-200px to 200px)
+            const randomY = (Math.random() * 200 - 100); // Random Y position (-100px to 100px)
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+    </script>
+</body>
+</html>

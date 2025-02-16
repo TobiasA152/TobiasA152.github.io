@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who Said It?</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fceef5;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ff6493;
+    }
+    .quote-game {
+      width: 640px;
+      margin: auto;
+      background: #ffe6ec;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .quote {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .button {
+      background: #ff6493;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .button:hover {
+      transform: scale(1.1);
+    }
+    .counter {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #ff6493;
+    }
+    .counter span {
+      font-weight: bold;
+      color: #333;
+    }
+    /* Popup style */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      background: rgba(255, 182, 193, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .popup-button {
+      background: #ff6493;	
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .popup-button.next {
+      background: #ff8c00; /* Different color for the "Next" button */
+      margin-left: 10px;
+    }
+	.quote {
+	  font-family: 'Comic Neue', cursive;
+	  font-size: 2em;
+	  color: #fff;
+	  background-color: #ff8c94;
+	  padding: 20px;
+	  border-radius: 50px;
+	  box-shadow: 0 8px 20px rgba(255, 140, 148, 0.4);
+	  display: inline-block;
+	  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.quote::after {
+	  content: "”";
+	  font-size: 3em;
+	  color: #ffd3d6;
+	  position: absolute;
+	  bottom: -40px;
+	  right: -10px;
+	}
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <audio id="backgroundAudio" autoplay loop hidden>
+  <source src="audio/random2.mp4" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+  <h1>Happy Valentine's Day, My Love!</h1>
+  <div class="popup" id="startPopup">
+    <div class="popup-content">
+      <p>Welcome to "Who Said It?"! You'll see quotes from our conversations. Guess whether Adam or you said it.<br/>Let's see how well you know us! Get 9/10 right to move on! 💖</p>
+      <button class="popup-button" onclick="closePopup('startPopup');startAudio();">Start Game</button>
+    </div>
+  </div>
+  <div class="popup" id="winPopup" style="display: none;">
+    <div class="popup-content">
+      <p id="winMessage"></p>
+      <button class="popup-button" onclick="closePopup('winPopup')">Play Again</button>
+      <button class="popup-button next" onclick="goToNextPage()">Next</button>
+    </div>
+  </div>
+  <div class="popup" id="tryAgainPopup" style="display: none;">
+    <div class="popup-content">
+      <p id="tryAgainMessage"></p>
+      <button class="popup-button" onclick="closePopup('tryAgainPopup')">Play Again</button>
+    </div>
+  </div>
+  <div class="quote-game">
+    <div class="quote" id="quoteText"></div>
+    <div class="buttons">
+      <button class="button" onclick="checkAnswer('Adam')">
+        <img src="img/adam3.jpg" alt="Adam" />
+      </button>
+      <button class="button" onclick="checkAnswer('Thư')">
+        <img src="img/thu1.jpg" alt="Thư" />
+      </button>
+    </div>
+    <div class="counter">
+      Correct: <span id="correctCounter">0</span> | Incorrect: <span id="incorrectCounter">0</span>
+    </div>
+  </div>
+  <script>
+    const quotes = [
+      { text: "Bb I think I'm obsessed. I think about you every 5 seconds. Fr.", speaker: "Thư" },
+      { text: "I think I've got addicted to you", speaker: "Adam" },
+      { text: "I really hope I can open your heart again, but I understand if it's a slow process. We're not in a rush", speaker: "Adam" },
+      { text: "I'm very very lucky to have met you. If I had to describe everything I'd want in a partner, you'd match up like a textbook definition. I feel genuinely, truly and wholly happy and content when I'm with you.", speaker: "Adam" },
+      { text: "I can't stop thinking there's nothing about you that I ever want to complain about except for heigh and that one time you cahnged for 20mins and I waited outside", speaker: "Thư" },
+      { text: "Jesus look at youu wow you look very nice very very pretty", speaker: "Thư" },
+      { text: "Shit. Sexy. Huge nose", speaker: "Thư" },
+      { text: "I guess the happiest people on the world are those who can date their idols and those who can date you", speaker: "Thư" },
+      { text: "I look at my friends these days and I think I hope they find someone like you. I wonder if I really do deserve you. Why me but not those people.", speaker: "Thư" },
+      { text: "You give me peace. I want you to be my future. I love you", speaker: "Adam" },
+	  { text: "Feels like the world is so noisy, but you give me the power to push through it with ease", speaker: "Adam" },
+      { text: "I really want to be wholesome for you. I'm not just responsible for myself only anymore", speaker: "Thư" },
+      { text: "Baby I'm so happy I found you, you're sick af <3", speaker: "Thư" },
+      { text: "Baby you're the best. If I can't marry you I'll kill you or kill anyone you have your eyes on. None but a lifeless lips shall touch mine own", speaker: "Thư" },
+      { text: "Thank you for being my courage", speaker: "Thư" },
+      { text: "You're in every song I listen to. I think I really like having you in my life. Everything became a bit prettier", speaker: "Thư" },
+      { text: "You add so much colour into my every day. I think gradually you're becoming a part of me", speaker: "Adam" },
+      { text: "You're a v healthy partner. We do all intellectual stuff 😂 Thanks God you sucked at league. This could have been worse 😂", speaker: "Thư" },
+      { text: "I've seen all of your/our photos so many times over. So I'm v happy when you send another pic of you. But they don't get old somehow, they give me the same feeling as the first time I saw them :))", speaker: "Adam" },
+      { text: "Baby I misssssssss youuuuuu. Missssss your smeeeeeeel", speaker: "Thư" },
+	  { text: "I love you so much. I honestly gave up hopes on finding sbd like you and I thought I would settle down for half of what you are. If one day you walk out of my life, I can't imagine if I can pretend to live normally as I did before.", speaker: "Thư" },
+      { text: "I really like imagining you joining my family. I know you say you don't like interacting wiht people but I think you'd fit in well hehe", speaker: "Adam" },
+      { text: "I never want to let you down and I'll do all in my power to give you more than what I am now. I still feel like I don't deserve you in many ways and you inspire me to make you proud and happy", speaker: "Adam" },
+      { text: "You're my dream. But my imagination not good enough. So you're even better :))", speaker: "Adam" },
+      { text: "Baby <3 you make me stop feeling jealous about other couples, now I feel superior 😂", speaker: "Thư" },
+      { text: "Actually I do believe in parallel universes. I hope I find you in most of them. There's a parallel universe where I see you on campus and stalk you. Then I lock you in basement. Have u forever :3", speaker: "Adam" },
+      { text: "Your whispered name. Oh sweet the melody of heaven's kiss. That turns darkest midnight into day. The stars themselves tremble with the bliss. Of the one who walks the firmament's array", speaker: "Thư" }
+    ];
+
+    let currentQuoteIndex = 0;
+    let correctCounter = 0;
+    let incorrectCounter = 0;
+
+    // Function to shuffle the quotes array
+    function shuffleQuotes() {
+      for (let i = quotes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [quotes[i], quotes[j]] = [quotes[j], quotes[i]];
+      }
+    }
+
+    function displayQuote() {
+      const quoteText = document.getElementById('quoteText');
+      quoteText.textContent = quotes[currentQuoteIndex].text;
+    }
+
+    function checkAnswer(guess) {
+      const correctSpeaker = quotes[currentQuoteIndex].speaker;
+      if (guess === correctSpeaker) {
+        correctCounter++;
+        document.getElementById('correctCounter').innerText = correctCounter;
+      } else {
+        incorrectCounter++;
+        document.getElementById('incorrectCounter').innerText = incorrectCounter;
+      }
+
+      currentQuoteIndex++;
+      if (currentQuoteIndex < 10) { // Stop after 10 questions
+        displayQuote();
+      } else {
+        endGame();
+      }
+    }
+
+    function endGame() {
+      if (correctCounter >= 9) {
+        document.getElementById('winMessage').innerText = `Congratulations! You got ${correctCounter} out of 10 correct! 💖 You know us so well!`;
+        document.getElementById('winPopup').style.display = 'flex';
+      } else {
+        document.getElementById('tryAgainMessage').innerText = `You got ${correctCounter} out of 10 correct. 💝 Try again to get at least 9 correct!`;
+        document.getElementById('tryAgainPopup').style.display = 'flex';
+      }
+    }
+
+    function closePopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+      resetGame();
+    }
+
+    function resetGame() {
+      currentQuoteIndex = 0;
+      correctCounter = 0;
+      incorrectCounter = 0;
+      document.getElementById('correctCounter').innerText = correctCounter;
+      document.getElementById('incorrectCounter').innerText = incorrectCounter;
+      shuffleQuotes(); // Shuffle the quotes again for a new game
+      displayQuote();
+    }
+
+    function goToNextPage() {
+      // Replace 'next-page.html' with the URL of the next webpage
+      window.location.href = 'next-page.html';
+    }
+
+    shuffleQuotes(); // Shuffle the quotes when the page loads
+    displayQuote();
+	
+	function startAudio() {
+    var audio = document.getElementById('backgroundAudio');
+    var playAudioButton = document.getElementById('playAudioButton');
+
+    // Attempt to play the audio
+    audio.play().then(() => {
+        console.log('Audio is playing');
+        playAudioButton.style.display = "none"; // Hide the button
+    });
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Whack-an-Adam!</title>
+    <style>
+      /* Default cursor is club.png */
+      body {
+        cursor: url('img/club.png'), auto;
+        font-family: 'Arial', sans-serif;
+        background-color: #fceef5;
+        text-align: center;
+        color: #4b4b4b;
+      }
+
+      /* When the mouse is clicked (mousedown), use club2.png */
+      body:active {
+        cursor: url('img/club2.png'), auto;
+      }
+
+      h1 {
+        font-size: 3rem;
+        color: #ff6493;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .score {
+        background: #ffe5cf;
+        padding: 0 1rem;
+        border-radius: 1rem;
+      }
+      .game {
+        width: 600px;
+        height: 400px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px auto;
+        position: relative;
+      }
+      .hole {
+        flex: 1 0 33.33%;
+        overflow: hidden;
+        position: relative;
+      }
+      .hole:after {
+        display: block;
+        background: url('img/flowerspainting.png') bottom center no-repeat;
+        background-size: contain;
+        content: '';
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        bottom: -30px;
+      }
+      .mole {
+        background: bottom center no-repeat;
+        background-size: 80%;
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: 100%;
+        transition: all 0.4s;
+      }
+      .hole.up .mole {
+        top: 0;
+      }
+      #start {
+        background-color: #ff6493;
+        color: white;
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      #start:hover {
+        background-color: #ff4f70;
+      }
+      /* Popup styles */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      .popup-content {
+        background: rgba(255, 182, 193, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        text-align: center;
+        font-size: 1.2em;
+      }
+      .popup-button {
+        background: #ff6493;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .popup-button.next {
+        background: #ff8c00;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+	  <audio id="backgroundAudio" autoplay loop hidden>
+	  <source src="audio/funnya.mp3" type="audio/mpeg">
+	  Your browser does not support the audio element.
+	</audio>
+    <h1>Whack-an-Adam!</h1>
+    <h2>Score: <span class="score">0</span></h2>
+    <button id="start" onClick="startGame()">Start</button>
+    <div class="popup" id="startPopup">
+      <div class="popup-content">
+        <p>Welcome to Whack-an-Adam! Whack the moles to score points. Whack at least 30 moles to win the game. Good luck!</p>
+        <button class="popup-button" onClick="closePopup('startPopup');startAudio()">Start Game</button>
+      </div>
+    </div>
+    <div class="popup" id="endPopup" style="display: none;">
+      <div class="popup-content">
+        <p id="endMessage"></p>
+        <button class="popup-button" onClick="closePopup('endPopup')">Play Again</button>
+        <button class="popup-button next" id="nextButton" style="display: none;" onClick="goToNextPage()">Next</button>
+      </div>
+    </div>
+    <div class="game">
+      <div class="hole hole1"><div class="mole"></div></div>
+      <div class="hole hole2"><div class="mole"></div></div>
+      <div class="hole hole3"><div class="mole"></div></div>
+      <div class="hole hole4"><div class="mole"></div></div>
+      <div class="hole hole5"><div class="mole"></div></div>
+      <div class="hole hole6"><div class="mole"></div></div>
+    </div>
+    <script>
+	  var audio = document.getElementById("backgroundAudio");
+	  audio.volume = 0.2;
+      const holes = document.querySelectorAll('.hole');
+      const scoreBoard = document.querySelector('.score');
+      const moles = document.querySelectorAll('.mole');
+      const button = document.querySelector('#start');
+      const nextButton = document.querySelector('#nextButton');
+      let lastHole;
+      let timeUp = false;
+      let score = 0;
+      const moleImages = ['img/drawing.png', 'img/enlarged.png', 'img/samurai.png', 'img/strong.png'];
+
+      function randomTime(min, max) {
+        return Math.round(Math.random() * (max - min) + min);
+      }
+
+      function randomHole(holes) {
+        const idx = Math.floor(Math.random() * holes.length);
+        const hole = holes[idx];
+        if (hole === lastHole) return randomHole(holes);
+        lastHole = hole;
+        return hole;
+      }
+
+      function randomMoleImage() {
+        const idx = Math.floor(Math.random() * moleImages.length);
+        return moleImages[idx];
+      }
+
+      function peep() {
+        const time = randomTime(300, 1000);
+        const hole = randomHole(holes);
+        const mole = hole.querySelector('.mole');
+        mole.style.backgroundImage = `url(${randomMoleImage()})`;
+        hole.classList.add('up');
+        setTimeout(() => {
+          hole.classList.remove('up');
+          if (!timeUp) peep();
+        }, time);
+      }
+
+      function startGame() {
+        scoreBoard.textContent = 0;
+        timeUp = false;
+        score = 0;
+        button.style.visibility = 'hidden';
+        peep();
+        setTimeout(() => {
+          timeUp = true;
+          button.innerHTML = 'Play Again?';
+          button.style.visibility = 'visible';
+          nextButton.style.display = 'none';
+          if (score >= 30) {
+            document.getElementById('endMessage').innerText = 'Congratulations! You won the game!';
+            nextButton.style.display = 'inline-block';
+          } else {
+            document.getElementById('endMessage').innerText = 'Time\'s up! You did not hit 30 Adams. Try again!';
+          }
+          document.getElementById('endPopup').style.display = 'flex';
+        }, 10000);
+      }
+
+      function bonk(e) {
+        if (!e.isTrusted) return;
+        score++;
+        this.classList.remove('up');
+        scoreBoard.textContent = score;
+      }
+
+      function closePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+        if (popupId === 'endPopup') {
+          startGame();
+        }
+      }
+
+      function goToNextPage() {
+        // Replace 'next-page.html' with the URL of the next webpage
+        window.location.href = 'continue1.html';
+      }
+
+      moles.forEach(mole => mole.addEventListener('click', bonk));
+	  
+	  function startAudio() {
+    var audio = document.getElementById('backgroundAudio');
+    var playAudioButton = document.getElementById('playAudioButton');
+
+    // Attempt to play the audio
+    audio.play().then(() => {
+        console.log('Audio is playing');
+        playAudioButton.style.display = "none"; // Hide the button
+    });
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fceef5;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ff6493;
+    }
+    .memory-game {
+      width: 640px;
+      height: 640px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      perspective: 1000px;
+      background: #ffe6ec;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .memory-card {
+      width: calc(25% - 10px);
+      height: calc(33.333% - 10px);
+      margin: 5px;
+      position: relative;
+      transform: scale(1);
+      transform-style: preserve-3d;
+      transition: transform .5s;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+    .memory-card:active {
+      transform: scale(0.97);
+      transition: transform .2s;
+    }
+    .memory-card.flip {
+      transform: rotateY(180deg);
+    }
+    .front-face,
+    .back-face {
+      width: 100%;
+      height: 100%;
+      padding: 0px;
+      position: absolute;
+      border-radius: 10px;
+      background: #ffb6c1;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      color: white;
+      font-weight: bold;
+    }
+    .front-face {
+      transform: rotateY(180deg);
+      background: #ff6493;
+    }
+    /* Counter Style */
+    .counter {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #ff6493;
+    }
+    .counter span {
+      font-weight: bold;
+      color: #333;
+    }
+    /* Popup style */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-content {
+      background: rgba(255, 182, 193, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .popup-button {
+      background: #ff6493;	
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .popup-button.next {
+      background: #ff8c00; /* Different color for the "Next" button */
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+ <audio id="backgroundAudio" autoplay loop hidden>
+  <source src="audio/AllOfMe.mp4" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+  <h1>Happy Valentine's Day, My Love!</h1>
+  <div class="popup" id="startPopup">
+    <div class="popup-content">
+      <p>Welcome to the love brain dojo! Match the cards to win. Make sure to complete the board in 10 moves or under to progress to the next stage. Good luck!</p>
+      <button class="popup-button" onclick="closePopup('startPopup');startAudio()">Start Game</button>
+    </div>
+  </div>
+  <div class="popup" id="endPopup" style="display: none;">
+    <div class="popup-content">
+      <p id="endMessage"></p>
+      <button class="popup-button" onclick="closePopup('endPopup')">Play Again</button>
+      <button class="popup-button next" onclick="goToNextPage()">Next</button>
+    </div>
+  </div>
+  <div class="popup" id="endPopupTryAnother" style="display: none;">
+    <div class="popup-content">
+      <p id="endMessageTryAnother"></p>
+      <button class="popup-button" onclick="closePopup('endPopupTryAnother')">Play Again</button>
+    </div>
+  </div>
+  <section class="memory-game">
+    <div class="memory-card" data-framework="cutie">
+      <img class="front-face" src="img/funny.png" alt="cutie" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="cutie">
+      <img class="front-face" src="img/funny.png" alt="cutie" /> 
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="heart">
+      <img class="front-face" src="img/heart.png" alt="heart" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="heart">
+      <img class="front-face" src="img/heart.png" alt="heart" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="flowers">
+      <img class="front-face" src="img/flowers1.png" alt="flowers" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="flowers">
+      <img class="front-face" src="img/flowers1.png" alt="flowers" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="toothpaste">
+      <img class="front-face" src="img/toothpaste.png" alt="toothpaste" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="toothpaste">
+      <img class="front-face" src="img/toothpaste.png" alt="toothpaste" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="back">
+      <img class="front-face" src="img/back.png" alt="back" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="back">
+      <img class="front-face" src="img/back.png" alt="back" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="parrot">
+      <img class="front-face" src="img/parrot1.png" alt="React" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+    <div class="memory-card" data-framework="parrot">
+      <img class="front-face" src="img/parrot2.png" alt="React" />
+      <img class="back-face" src="img/faces5.png" alt="Same Person" />
+    </div>
+  </section>
+  <div class="counter">
+    Moves: <span id="moveCounter">0</span> | Matches: <span id="matchCounter">0</span>
+  </div>
+  <script>
+    const cards = document.querySelectorAll('.memory-card');
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let matchCounter = 0;
+    let moveCounter = 0;
+
+    // Shuffle the cards at the start of the game
+    shuffle();
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return;
+      this.classList.add('flip');
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+        return;
+      }
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+      
+      if (isMatch) {
+        matchCounter++; // Increment first
+        document.getElementById('matchCounter').innerText = matchCounter;
+        disableCards();
+      } else {
+        unflipCards();
+      }
+      
+      moveCounter++;
+      document.getElementById('moveCounter').innerText = moveCounter;
+
+      // Check after matchCounter has been updated
+      if (moveCounter <= 10 && matchCounter === 6) {
+        setTimeout(() => {
+          document.getElementById('endMessage').innerText = 'Congratulations! You won the game in 10 moves or less! 💖 Please continue my love';
+          document.getElementById('endPopup').style.display = 'flex';
+        }, 500);
+      } else if (matchCounter === 6) {
+        setTimeout(() => {
+          document.getElementById('endMessageTryAnother').innerText = 'Congratulations! 💝 You won the game! But you did not win in 10 moves or less please try again to progress <3';
+          document.getElementById('endPopupTryAnother').style.display = 'flex';
+        }, 500);
+      }
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+        resetBoard();
+      }, 1500);
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }	
+
+    function closePopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+      if (popupId === 'endPopup') {
+        resetGame();
+      }
+	  else if (popupId === 'endPopupTryAnother') {
+        resetGame();
+      }
+    }
+
+    function resetGame() {
+      matchCounter = 0;
+      moveCounter = 0;
+      document.getElementById('matchCounter').innerText = matchCounter;
+      document.getElementById('moveCounter').innerText = moveCounter;
+      cards.forEach(card => {
+        card.classList.remove('flip');
+        card.addEventListener('click', flipCard);
+      });
+      shuffle(); // Shuffle the cards again when resetting the game
+    }
+
+    function shuffle() {
+      cards.forEach(card => {
+        let randomPos = Math.floor(Math.random() * 12);
+        card.style.order = randomPos;
+      });
+    }
+
+    function goToNextPage() {
+      // Replace 'next-page.html' with the URL of the next webpage
+      window.location.href = 'continue.html';
+    }
+
+    cards.forEach(card => card.addEventListener('click', flipCard));
+	
+	function startAudio() {
+    var audio = document.getElementById('backgroundAudio');
+    var playAudioButton = document.getElementById('playAudioButton');
+
+    // Attempt to play the audio
+    audio.play().then(() => {
+        console.log('Audio is playing');
+        playAudioButton.style.display = "none"; // Hide the button
+    });
+}
+  </script>
+</body>
+</html>
