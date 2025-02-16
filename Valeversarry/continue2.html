@@ -213,7 +213,7 @@
 			<button id="playButton" class="btn" onclick="playVideo()">Click to Play Video</button>
 			</div>
         </div>
-        <button class="btn" onclick="nextStory();startAudio()">Next</button>
+        <button class="btn" onclick="nextStory();startAudio()" id="nextButton">Next</button>
 		<div id="valentine-question" class="valentine-question" style="display: none;">Will you be my valentine?</div>
         <div class="option-buttons" id="options" style="display: none;">
             <button class="yes" onclick="handleAnswer('yes')">Yes</button>
@@ -257,6 +257,7 @@
 			document.getElementById("story-text").style.display = "none";
 			document.getElementById("story-image").style.display = "none";
 			document.querySelector(".btn").style.display = "none";
+			document.getElementById("nextButton").style.display = "none";
 			showValentineQuestion();
 		}
 	}
