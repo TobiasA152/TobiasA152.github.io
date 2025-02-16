@@ -206,10 +206,11 @@
         <p class="story-text" id="story-text"><span>Thank you for playing along with me baby</span></p>
         <img src="/Valeversarry/img/onsen.jpg" alt="" class="story-image float-effect" id="story-image">
 		<div id="water" style="display: none;"><div class="headline"></div><div class="video-container" id="video-container">
-            <video width="100%" autoplay loop>
+            <video width="100%" id="valentineVideo" autoplay loop>
                 <source src="/Valeversarry/img/water.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+			<button id="playButton" class="btn" onclick="playVideo()">Click to Play Video</button>
 			</div>
         </div>
         <button class="btn" onclick="nextStory();startAudio()">Next</button>
