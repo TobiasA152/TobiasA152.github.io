@@ -198,7 +198,7 @@
 </head>
 <body>
 	<audio id="backgroundAudio" autoplay loop hidden>
-	  <source src="audio/STC.mp4" type="audio/mpeg">
+	  <source src="/audio/STC.mp4" type="/audio/mpeg">
 	  Your browser does not support the audio element.
 	</audio>
     <h1>Happy Valentine's and Anniversary, My Love!</h1>
@@ -208,7 +208,7 @@
         <button class="btn" onclick="nextStory();startAudio()">Next</button>
         <div id="valentine-question" style="display: none;"><div class="headline">Ready for Challenge 1?</div><div class="video-container" id="video-container">
             <video width="100%" id="valentineVideo" loop>
-				<source src="img/singingvideo.mp4" type="video/mp4">
+				<source src="/img/singingvideo.mp4" type="video/mp4">
 				Your browser does not support the video tag.
 			</video>
 			 <button id="playButton" class="btn" onclick="playVideo()">Click to Play Video</button>
@@ -220,18 +220,18 @@
     </div>
     <script>
         const storyData = [
-            { text: "Hello my cutie", image: "img/swim.jpg", effect: "rotate" },
-            { text: "Welcome to my love website baby <3", image: "img/swim.jpg", effect: "rotate" },
-            { text: "You will be taking a journey with me through time and space", image: "img/swim.jpg", effect: "float" },
-            { text: "Get ready because you will have to take on many challenges to receive your love rewards", image: "img/swim.jpg", effect: "color-change" },
-            { text: "Firstly, let me say just how much I love you :)", image: "img/seal.jpg", effect: "bounce" },
-            { text: "I think that every day I share with you is fresh and bright", image: "img/seal.jpg", effect: "float" },
-			{ text: "You make holidays bright, memorable and experiences that I will remember my whole lifetime", image: "img/singing.jpg", effect: "color-change" },
-			{ text: "You make daily life spicy and change my days from meaningless labour into a worthwhile adventure", image: "img/singing.jpg", effect: "color-change" },
-			{ text: "Life with you is special", image: "img/cat-jump1.gif", effect: "bounce" },
-            { text: "So are you ready to take on the love challenges?", image: "img/game.jpg", effect: "" },
-            { text: "The first challenge is to show that your brain has enough love capacity", image: "img/game.jpg", effect: "color-change" },
-            { text: "Let's goooooo", image: "img/game.jpg", effect: "rotate" }
+            { text: "Hello my cutie", image: "/img/swim.jpg", effect: "rotate" },
+            { text: "Welcome to my love website baby <3", image: "/img/swim.jpg", effect: "rotate" },
+            { text: "You will be taking a journey with me through time and space", image: "/img/swim.jpg", effect: "float" },
+            { text: "Get ready because you will have to take on many challenges to receive your love rewards", image: "/img/swim.jpg", effect: "color-change" },
+            { text: "Firstly, let me say just how much I love you :)", image: "/img/seal.jpg", effect: "bounce" },
+            { text: "I think that every day I share with you is fresh and bright", image: "/img/seal.jpg", effect: "float" },
+			{ text: "You make holidays bright, memorable and experiences that I will remember my whole lifetime", image: "/img/singing.jpg", effect: "color-change" },
+			{ text: "You make daily life spicy and change my days from meaningless labour into a worthwhile adventure", image: "/img/singing.jpg", effect: "color-change" },
+			{ text: "Life with you is special", image: "/img/cat-jump1.gif", effect: "bounce" },
+            { text: "So are you ready to take on the love challenges?", image: "/img/game.jpg", effect: "" },
+            { text: "The first challenge is to show that your brain has enough love capacity", image: "/img/game.jpg", effect: "color-change" },
+            { text: "Let's goooooo", image: "/img/game.jpg", effect: "rotate" }
         ];
         let index = 0;
 

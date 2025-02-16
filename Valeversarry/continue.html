@@ -198,17 +198,17 @@
 </head>
 <body>
 	<audio id="backgroundAudio" autoplay loop hidden>
-	  <source src="audio/random2.mp4" type="audio/mpeg">
+	  <source src="/audio/random2.mp4" type="/audio/mpeg">
 	  Your browser does not support the audio element.
 	</audio>
     <h1>Happy Valentine's and Anniversary, My Love!</h1>
     <div class="story-container">
         <p class="story-text" id="story-text"><span>Well done baby I'm very proud!! 🥹</span></p>
-        <img src="img/swim.jpg" alt="Valentine's Image" class="story-image float-effect" id="story-image">
+        <img src="/img/swim.jpg" alt="Valentine's Image" class="story-image float-effect" id="story-image">
         <button class="btn" onclick="nextStory();startAudio()">Next</button>
         <div id="valentine-question" style="display: none;"><div class="headline">Ready for Challenge 2?</div><div class="video-container" id="video-container">
             <video width="100%" id="valentineVideo" loop>
-                <source src="img/HoChiMinh.mp4" type="video/mp4">
+                <source src="/img/HoChiMinh.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
 			<button id="playButton" class="btn" onclick="playVideo()">Click to Play Video</button>
@@ -220,19 +220,19 @@
     </div>
     <script>
         const storyData = [
-            { text: "Well done baby I'm very proud", image: "img/swim.jpg", effect: "rotate" },
-            { text: "You are the best at everything :)", image: "img/swim.jpg", effect: "float" },
-            { text: "No matter what you do you are always the best", image: "img/swim.jpg", effect: "float" },
-            { text: "All these things that you do first time with energy and drive.", image: "img/skii.jpg", effect: "color-change" },
-            { text: "You try for the first time and think you can beat me when I've been doing for years", image: "img/skii.jpg", effect: "bounce" },
-            { text: "But actually you somehow do always beat me heheh", image: "img/tabletennis.jpg", effect: "float" },
-			{ text: "Your competitiveness makes everything fun", image: "img/tabletennis.jpg", effect: "color-change" },
-			{ text: "I'm sure we could make anything into a competition", image: "img/climbing1.jpg", effect: "color-change" },
-			{ text: "But no matter if I win or lose (mostly lose), I love spending time with you", image: "img/giphy.gif", effect: "bounce" },
-			{ text: "But no matter if I win or lose (mostly lose), I love spending time with you", image: "img/giphy1.gif", effect: "bounce" },
-            { text: "I know that I can be annoying sometimes", image: "img/game.jpg", effect: "" },
-            { text: "So I thought I'd let you take your anger out", image: "img/game.jpg", effect: "color-change" },
-            { text: "Are you ready for the next challenge my cutie?	", image: "img/game.jpg", effect: "rotate" }
+            { text: "Well done baby I'm very proud", image: "/img/swim.jpg", effect: "rotate" },
+            { text: "You are the best at everything :)", image: "/img/swim.jpg", effect: "float" },
+            { text: "No matter what you do you are always the best", image: "/img/swim.jpg", effect: "float" },
+            { text: "All these things that you do first time with energy and drive.", image: "/img/skii.jpg", effect: "color-change" },
+            { text: "You try for the first time and think you can beat me when I've been doing for years", image: "/img/skii.jpg", effect: "bounce" },
+            { text: "But actually you somehow do always beat me heheh", image: "/img/tabletennis.jpg", effect: "float" },
+			{ text: "Your competitiveness makes everything fun", image: "/img/tabletennis.jpg", effect: "color-change" },
+			{ text: "I'm sure we could make anything into a competition", image: "/img/climbing1.jpg", effect: "color-change" },
+			{ text: "But no matter if I win or lose (mostly lose), I love spending time with you", image: "/img/giphy.gif", effect: "bounce" },
+			{ text: "But no matter if I win or lose (mostly lose), I love spending time with you", image: "/img/giphy1.gif", effect: "bounce" },
+            { text: "I know that I can be annoying sometimes", image: "/img/game.jpg", effect: "" },
+            { text: "So I thought I'd let you take your anger out", image: "/img/game.jpg", effect: "color-change" },
+            { text: "Are you ready for the next challenge my cutie?	", image: "/img/game.jpg", effect: "rotate" }
         ];
         let index = 0;
 
