@@ -206,10 +206,11 @@
         <p class="story-text" id="story-text"><span>Now you had all your smacking fun, it is time to for me to apologise and make up</span></p>
         <img src="/Valeversarry/img/hug.jpg" alt="" class="story-image float-effect" id="story-image">
 		<div id="shakshuka" style="display: none;"><div class="headline"></div><div class="video-container" id="video-container">
-            <video width="100%" autoplay loop>
+            <video width="100%">
                 <source src="/Valeversarry/img/shakshuka.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+			<button id="playButton1" class="btn" onclick="playVideo1()">Click to Play Video</button>
 			</div>
         </div>
         <button class="btn" onclick="nextStory();startAudio()">Next</button>
@@ -296,6 +297,20 @@
 					console.error('Video playback failed:', error);
 				});
 			}
+	function playVideo1() {
+				const video = document.getElementById("shakshuka");
+				const playButton = document.getElementById("playButton1");
+				// Attempt to play the video
+				video.play().then(() => {
+					console.log('Video is playing');
+					playButton.style.display = "none"; // Hide the button
+				}).catch(error => {
+					// Show a popup message if video is blocked or fails to play
+					alert('Video playback is blocked. Please interact with the page (e.g., click anywhere) to allow the video to play.');
+					console.error('Video playback failed:', error);
+				});
+			}
+			
 	function startAudio() {
     var audio = document.getElementById('backgroundAudio');
 
